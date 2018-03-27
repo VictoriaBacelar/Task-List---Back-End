@@ -21,11 +21,9 @@ const tasklist = [
     position: 3}
 ]
 
-const tasklist_completed = [
-]
+const tasklist_completed = []
 
-const tasklist_notcompleted = [
-]
+const tasklist_notcompleted = []
 
 router.get('/', (ctx, next) => {
     ctx.body = 'Hello World'
