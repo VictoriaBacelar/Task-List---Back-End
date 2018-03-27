@@ -10,15 +10,21 @@ const router = new Router()
 let next_id = 2 
 
 const tasklist = [
-    {task: 'oi',
-    completed: false,
-    position: 1 },
-    {task: 'ola',
-    completed: true,
-    position: 2},
-    {task: 'olazin',
-    completed: true,
-    position: 3}
+    {
+        task: 'oi',
+        completed: false,
+        position: 1 
+    },
+    {
+        task: 'ola',
+        completed: true,
+        position: 2
+    },
+    {
+        task: 'olazin',
+        completed: true,
+        position: 3
+    }
 ]
 
 const tasklist_completed = []
