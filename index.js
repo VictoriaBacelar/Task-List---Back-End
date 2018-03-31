@@ -44,7 +44,7 @@ router.get('/api/completed', (ctx, next) => {
     var j = 0
     for (var i=j; i<tasklist.length; i++){
         if(tasklist[i].completed===true){
-            tasklist_completed[i] = tasklist[i].task
+            tasklist_completed[i] = tasklist[i]
         }
         else{
         ctx.status = 404
@@ -59,7 +59,7 @@ router.get('/api/notcompleted', (ctx, next) => {
     var j = 0
     for (var i=j; i<tasklist.length; i++){
         if(tasklist[i].completed===false){
-            tasklist_notcompleted[i] = tasklist[i].task
+            tasklist_notcompleted[i] = tasklist[i]
         }
         else{
         ctx.status = 404
