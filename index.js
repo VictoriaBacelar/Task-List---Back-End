@@ -31,16 +31,16 @@ const tasklist_completed = []
 
 const tasklist_notcompleted = []
 
-router.get('/', (ctx, next) => {
+router.get('/api', (ctx, next) => {
     ctx.body = 'Hello World'
 })
 
-router.get('/tasklist', (ctx, next) => {
+router.get('/api/tasklist', (ctx, next) => {
     ctx.body = Object.values(tasklist)
     .filter(x => x)
 })
 
-router.get('/completed', (ctx, next) => {
+router.get('/api/completed', (ctx, next) => {
     var j = 0
     for (var i=j; i<tasklist.length; i++){
         if(tasklist[i].completed===true){
@@ -55,7 +55,7 @@ router.get('/completed', (ctx, next) => {
     .filter(x => x)
 })
 
-router.get('/notcompleted', (ctx, next) => {
+router.get('/api/notcompleted', (ctx, next) => {
     var j = 0
     for (var i=j; i<tasklist.length; i++){
         if(tasklist[i].completed===false){
@@ -70,7 +70,7 @@ router.get('/notcompleted', (ctx, next) => {
     .filter(x => x)
 })
 
-router.get('/tasklist/:id', (ctx, next) => {
+router.get('/api/tasklist/:id', (ctx, next) => {
     const id = ctx.params.id-1
     if(tasklist[id]){
         ctx.body = tasklist[ctx.params.id-1]
@@ -81,7 +81,7 @@ router.get('/tasklist/:id', (ctx, next) => {
     }
 })
 
-router.post('/tasklist', (ctx, next) => {
+router.post('/api/tasklist', (ctx, next) => {
     const new_task = ctx.request.body
     const id = tasklist.length
     tasklist[id] = new_task
@@ -89,7 +89,7 @@ router.post('/tasklist', (ctx, next) => {
     ctx.status = 201
 })
 
-router.put('/tasklist/:id', (ctx, next) => {
+router.put('/api/tasklist/:id', (ctx, next) => {
     const id = ctx.params.id-1
     if (tasklist[id]) {
         const edit_task = ctx.request.body
@@ -121,7 +121,7 @@ router.put('/priority/:id', (ctx, next) => {
 })
 */
 
-router.delete('/tasklist/:id', (ctx, next) => {
+router.delete('/api/tasklist/:id', (ctx, next) => {
     const id = ctx.params.id-1
     if(tasklist[id]){
         tasklist[id] = undefined
@@ -134,18 +134,26 @@ router.delete('/tasklist/:id', (ctx, next) => {
     }
 }) 
 
-router.delete('/delete', (ctx, next) => {
+router.delete('/api/delete/all/completed', (ctx, next) => {
     var j = 0
     for (var i=j; i<tasklist.length; i++){
+        if(tasklist[i].completed===true){
         tasklist[i] = ''
+        } 
     }
         ctx.body = ''
         ctx.status = 204
 })  
-
-router.get('/outro', (ctx, next) => {
-    ctx.body = 'Estou em outro'
-})
+router.delete('/api/delete/all/notcompleted', (ctx, next) => {
+    var j = 0
+    for (var i=j; i<tasklist.length; i++){
+        if(tasklist[i].completed===false){
+        tasklist[i] = ''
+        } 
+    }
+        ctx.body = ''
+        ctx.status = 204
+})  
 
 app
   .use(router.routes())
